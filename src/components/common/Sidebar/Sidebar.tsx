@@ -1,52 +1,58 @@
-import { useState } from "react";
-import { Nav } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
-import "./Sidebar.css";
+import React, { useState } from 'react'
+import { Nav } from 'react-bootstrap'
 
-const menuItems = [
-  { path: "/dashboard", icon: "bi-speedometer2", label: "Dashboard" },
-  { path: "/pacientes", icon: "bi-people", label: "Pacientes" },
-  { path: "/consultas", icon: "bi-calendar", label: "Consultas" },
-  { path: "/relatorios", icon: "bi-file-text", label: "Relatórios" },
-  { path: "/configuracoes", icon: "bi-gear", label: "Configurações" },
-];
+import NavLinkItem from './NavLinkItem'
+import styles from './Sidebar.module.css'
 
-const Sidebar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const location = useLocation();
+interface MenuItem {
+  path: string
+  icon: string
+  label: string
+}
+
+interface SidebarProps {
+  menuItems: MenuItem[]
+  baseRoute?: string
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ menuItems, baseRoute = '' }) => {
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(false)
 
   const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+    setIsCollapsed((prev) => !prev)
+  }
 
   return (
-    <div className={`sidebar bg-light ${isCollapsed ? "collapsed" : ""}`}>
+    <div className={`${styles.sidebar} ${isCollapsed ? styles.collapsed : ''}`}>
       <Nav className="flex-column">
-        <div className="sidebar-header">
-          <button className="toggle-btn" onClick={toggleSidebar}>
+        <div className={styles.sidebarHeader}>
+          <button
+            className={styles.toggleBtn}
+            onClick={toggleSidebar}
+            aria-label="Toggle Sidebar"
+          >
             <i
               className={`bi ${
                 isCollapsed
-                  ? "bi-chevron-double-right"
-                  : "bi-chevron-double-left"
+                  ? 'bi-chevron-double-right'
+                  : 'bi-chevron-double-left'
               }`}
             ></i>
           </button>
         </div>
         {menuItems.map((item) => (
-          <Nav.Link
-            as={Link}
-            to={item.path}
+          <NavLinkItem
             key={item.path}
-            className={location.pathname === item.path ? "active" : ""}
-          >
-            <i className={`bi ${item.icon}`}></i>
-            <span className="menu-label">{item.label}</span>
-          </Nav.Link>
+            path={item.path}
+            icon={item.icon}
+            label={item.label}
+            baseRoute={baseRoute}
+            isCollapsed={isCollapsed}
+          />
         ))}
       </Nav>
     </div>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar
