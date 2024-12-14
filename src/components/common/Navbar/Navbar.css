@@ -1,0 +1,9 @@
+.navbar {
+  min-height: 80px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+  line-height: 80px;
+}
