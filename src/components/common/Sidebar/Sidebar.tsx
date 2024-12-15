@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Nav } from 'react-bootstrap'
 
 import NavLinkItem from './NavLinkItem'
@@ -13,22 +13,25 @@ interface MenuItem {
 interface SidebarProps {
   menuItems: MenuItem[]
   baseRoute?: string
+  isCollapsed: boolean
+  onToggle: () => void
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ menuItems, baseRoute = '' }) => {
-  const [isCollapsed, setIsCollapsed] = useState<boolean>(true)
-
-  const toggleSidebar = () => {
-    setIsCollapsed((prev) => !prev)
-  }
-
+const Sidebar: React.FC<SidebarProps> = ({
+  menuItems,
+  baseRoute = '',
+  isCollapsed,
+  onToggle,
+}) => {
   return (
-    <div className={`${styles.sidebar} ${isCollapsed ? styles.collapsed : ''}`}>
+    <aside
+      className={`${styles.sidebar} ${isCollapsed ? styles.collapsed : ''}`}
+    >
       <Nav className="flex-column">
         <div className={styles.sidebarHeader}>
           <button
             className={styles.toggleBtn}
-            onClick={toggleSidebar}
+            onClick={onToggle}
             aria-label="Toggle Sidebar"
           >
             <i
@@ -51,7 +54,7 @@ const Sidebar: React.FC<SidebarProps> = ({ menuItems, baseRoute = '' }) => {
           />
         ))}
       </Nav>
-    </div>
+    </aside>
   )
 }
 

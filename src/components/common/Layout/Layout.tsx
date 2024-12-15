@@ -1,12 +1,14 @@
-import Navbar from '../Navbar/Navbar'
-import Sidebar from '../Sidebar/Sidebar'
-import React from 'react'
+import React, { useState } from 'react'
 import { Container } from 'react-bootstrap'
 
 import { useAppSelector } from '@/app/hooks'
 
-import styles from './Layout.module.css'
 import { ROUTES } from '@/utils/constants/routes'
+
+import styles from './Layout.module.css'
+
+import Navbar from '../Navbar/Navbar'
+import Sidebar from '../Sidebar/Sidebar'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -14,6 +16,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const user = useAppSelector((state) => state.auth.user)
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
 
   const sidebarMenuItems = [
     { path: ROUTES.DASHBOARD, icon: 'bi-speedometer2', label: 'Dashboard' },
@@ -30,19 +33,32 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     { label: 'Profile', href: ROUTES.PACIENTES },
   ]
 
+  const handleSidebarToggle = () => {
+    setIsSidebarCollapsed((prev) => !prev)
+  }
+
   return (
     <div className={styles.layout}>
       <Navbar
         userName={user?.name}
-        userAvatarUrl={user?.avatarUrl || '/api/placeholder/40/40'}
+        userAvatarUrl={user?.avatarUrl}
         menuItems={navbarMenuItems}
       />
-      <Sidebar menuItems={sidebarMenuItems} baseRoute="" />
-      <main className={styles.content}>
-        <Container fluid className="p-4">
-          {children}
-        </Container>
-      </main>
+      <div className={styles.mainContent}>
+        <Sidebar
+          menuItems={sidebarMenuItems}
+          baseRoute=""
+          isCollapsed={isSidebarCollapsed}
+          onToggle={handleSidebarToggle}
+        />
+        <main
+          className={`${styles.content} ${
+            isSidebarCollapsed ? styles.contentWithCollapsedSidebar : ''
+          }`}
+        >
+          <Container fluid>{children}</Container>
+        </main>
+      </div>
     </div>
   )
 }
