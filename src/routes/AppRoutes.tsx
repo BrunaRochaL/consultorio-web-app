@@ -6,7 +6,7 @@ import { ROUTES } from '@/utils/constants/routes'
 import NotFound from '@/pages/NotFound'
 
 const Dashboard = lazy(() => import('@/pages/Dashboard'))
-const Agendamento = lazy(() => import('@/pages/Agendamento'))
+const Scheduling = lazy(() => import('@/pages/Scheduling'))
 
 const AppRoutes: React.FC = () => {
   return (
@@ -14,7 +14,7 @@ const AppRoutes: React.FC = () => {
       <Routes>
         <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
         <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
-        <Route path={ROUTES.SCHEDULING} element={<Agendamento />} />
+        <Route path={ROUTES.SCHEDULING} element={<Scheduling />} />
       </Routes>
     </Suspense>
   )
