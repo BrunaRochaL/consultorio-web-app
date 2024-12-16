@@ -1,0 +1,27 @@
+.skeletonHeader,
+.skeletonCell {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeletonHeader {
+  background-color: #f8f9fa;
+  height: 42px;
+  width: 80%;
+}
+
+.skeletonCell {
+  height: 58px;
+  width: 100%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

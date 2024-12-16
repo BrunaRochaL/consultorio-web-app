@@ -1,0 +1,59 @@
+.statsCard {
+  border-radius: 0px;
+  height: 100%;
+  transition: transform 0.2s ease-in-out;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.statsCardBody {
+  padding: 1.25rem;
+}
+
+.statsContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.statsIcon {
+  font-size: 1.5rem;
+  color: #666;
+  opacity: 0.5;
+}
+
+.statsTitle {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.statsValue {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.statsValue small {
+  font-size: 0.875rem;
+  font-weight: normal;
+  color: #666;
+}
+
+.statsTrend {
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.positive {
+  color: #28a745;
+}
+
+.negative {
+  color: #dc3545;
+}

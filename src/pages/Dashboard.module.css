@@ -1,0 +1,16 @@
+.container {
+  padding: 1rem;
+}
+
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #6c757d;
+  margin-bottom: 1rem;
+}
+
+.loadingStats {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}

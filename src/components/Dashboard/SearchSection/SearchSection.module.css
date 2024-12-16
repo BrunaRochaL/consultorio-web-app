@@ -1,0 +1,30 @@
+.searchGroup {
+  border-radius: 0;
+}
+
+.searchInput {
+  height: 48px;
+  border-radius: 0;
+  border: 1px solid #dee2e6;
+  background-color: #f8f9fa !important;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+}
+
+.searchInput:focus {
+  background-color: #f8f9fa !important;
+  box-shadow: none;
+  border-color: #dee2e6;
+}
+
+.searchIcon {
+  background-color: #f8f9fa !important;
+  border-radius: 0;
+  border: 1px solid #dee2e6;
+  border-left: none;
+  padding: 0 1rem;
+}
+
+.searchIcon i {
+  color: #6c757d;
+}

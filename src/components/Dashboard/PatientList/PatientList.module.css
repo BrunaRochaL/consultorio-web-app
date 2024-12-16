@@ -1,0 +1,59 @@
+.patientListHeader {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  padding: 1rem;
+}
+
+.patientList {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.patientItem {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #dee2e6;
+  transition: background-color 0.2s;
+}
+
+.patientItem:last-child {
+  border-bottom: none;
+}
+
+.patientItem:hover {
+  background-color: #f8f9fa;
+}
+
+.patientAvatar {
+  width: 40px;
+  height: 40px;
+  margin-right: 1rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.patientAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.patientInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.patientName {
+  font-weight: 500;
+  color: #212529;
+}
+
+.appointmentTime {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.completed {
+  color: #28a745;
+}

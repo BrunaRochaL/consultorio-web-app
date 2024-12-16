@@ -1,0 +1,81 @@
+.calendarContainer {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.calendarHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.monthNavigation {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.calendar {
+  margin-bottom: 0;
+  height: 400px;
+  border-collapse: separate;
+  border-spacing: 3px;
+}
+
+.calendar th {
+  text-align: center;
+  padding: 0.5rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+  border: none;
+}
+
+.calendarDay {
+  text-align: center !important;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  width: 40px;
+  height: 40px;
+  border: 1px solid black !important;
+}
+
+.selected {
+  background-color: var(--bs-primary) !important;
+  color: white !important;
+  font-weight: bold;
+  border-color: var(--bs-primary) !important;
+}
+
+.otherMonth {
+  color: #999;
+  background-color: #f1f3f5;
+}
+
+.calendarHeader button {
+  padding: 5px;
+  color: black;
+}
+
+.calendarHeader i {
+  font-size: 1.5rem;
+}
+
+.calendarHeader h5 {
+  color: black;
+}
+
+.calendar.table-bordered,
+.calendar.table-bordered td {
+  border: initial;
+}

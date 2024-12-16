@@ -1,0 +1,26 @@
+.patientItem {
+  background: #fff;
+  margin-bottom: 8px;
+  padding: 10px;
+}
+
+.patientAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.patientInfoContainer {
+  flex: 1;
+}
+
+.statusPlaceholder {
+  border-radius: 16px;
+  height: 24px;
+  width: 80px;
+  background: #f0f0f0;
+}
+
+.statusContainer {
+  margin-left: auto;
+}
