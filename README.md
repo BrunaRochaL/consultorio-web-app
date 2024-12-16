@@ -55,22 +55,6 @@ O servidor estará disponível em `http://localhost:3001`
 - React Bootstrap
 - JSON Server
 
-## Estrutura do Projeto
-
-advice-health-app/
-├── src/
-│ ├── components/
-│ │ ├── common/
-│ │ └── Dashboard/
-│ ├── features/
-│ │ ├── appointments/
-│ │ └── auth/
-│ ├── services/
-│ │ └── api/
-│ └── assets/
-├── public/
-└── db.json
-
 ## Desenvolvimento
 
 O projeto utiliza:
