@@ -5,6 +5,8 @@ import { ROUTES } from '@/utils/constants/routes'
 
 import NotFound from '@/pages/NotFound'
 
+import Appointments from '../pages/Appointments'
+
 const Dashboard = lazy(() => import('@/pages/Dashboard'))
 const Scheduling = lazy(() => import('@/pages/Scheduling'))
 
@@ -15,6 +17,7 @@ const AppRoutes: React.FC = () => {
         <Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
         <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
         <Route path={ROUTES.SCHEDULING} element={<Scheduling />} />
+        <Route path={ROUTES.APPOINTMENTS} element={<Appointments />} />
       </Routes>
     </Suspense>
   )

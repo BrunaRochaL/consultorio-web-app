@@ -1,14 +1,36 @@
 .tableWrapper {
   width: 100%;
-  max-height: 550px;
   position: relative;
   border: 1px solid #dee2e6;
-  overflow: auto;
+  overflow-x: auto;
+}
+
+/* Estilização da scrollbar */
+.tableWrapper::-webkit-scrollbar,
+.paginationControls::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.tableWrapper::-webkit-scrollbar-track,
+.paginationControls::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb,
+.paginationControls::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb:hover,
+.paginationControls::-webkit-scrollbar-thumb:hover {
+  background: #bbb;
 }
 
 .table {
-  width: 100%;
-  min-width: 600px;
+  min-width: 800px;
   background-color: #fff;
   border-collapse: collapse;
   margin-bottom: 0 !important;
@@ -49,20 +71,92 @@
   font-size: 0.9rem;
 }
 
-.table input[type='checkbox'] {
-  margin: 0;
-}
-
 .table tbody tr:not(:last-child) td {
   border-bottom: 1px solid #f0f0f0;
 }
 
 .emptyMessage {
   text-align: center;
-  padding: 2rem !important;
+  padding: 2rem;
   color: #6c757d;
 }
 
-.clickable {
-  cursor: pointer;
+.paginationWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-top: none;
+}
+
+.itemsPerPageWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.itemsPerPageSelect {
+  width: 65px !important;
+  height: 32px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+  background-color: white;
+}
+
+.totalItems {
+  color: #6c757d;
+  font-size: 0.875rem;
+  margin-left: 1rem;
+  padding-left: 1rem;
+  border-left: 1px solid #dee2e6;
+}
+
+.paginationControls {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .paginationWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .paginationControls {
+    width: 100%;
+    justify-content: center;
+    overflow-x: auto;
+  }
+
+  .itemsPerPageWrapper {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .totalItems {
+    border-left: none;
+    padding-left: 0;
+    margin-left: 0.5rem;
+  }
+}
+
+@media (max-width: 539px) {
+  .paginationControls :global(.pagination) {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 0.5rem;
+  }
+
+  .paginationControls :global(.page-item) {
+    white-space: nowrap;
+  }
 }

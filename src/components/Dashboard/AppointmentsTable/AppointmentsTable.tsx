@@ -124,8 +124,9 @@ export const AppointmentsTable: React.FC<AppointmentsTableProps> = ({
           </p>
           <p>
             <strong>Tipo:</strong>{' '}
-            {selectedReminder?.type.charAt(0).toUpperCase() +
-              selectedReminder?.type.slice(1)}
+            {selectedReminder?.type &&
+              selectedReminder.type.charAt(0).toUpperCase() +
+                selectedReminder.type.slice(1)}
           </p>
           <p>
             <strong>Data:</strong>{' '}

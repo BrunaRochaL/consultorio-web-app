@@ -102,3 +102,9 @@ export const validateBirthDate = (date: string): boolean => {
 export const validateEmail = (email: string): boolean => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
+
+export const formatDayOfWeek = (dateString: string): string => {
+  const date = new Date(dateString)
+  const days = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
+  return days[date.getDay()]
+}

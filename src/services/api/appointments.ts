@@ -60,7 +60,6 @@ export const appointmentsApi = baseApi.injectEndpoints({
         method: 'PUT',
         body: {
           ...appointment,
-          status: 'AGENDADO',
         },
       }),
       invalidatesTags: () => ['Appointments', 'TimeSlots'],
@@ -74,18 +73,40 @@ export const appointmentsApi = baseApi.injectEndpoints({
     }),
     getAppointments: builder.query<
       Appointment[],
-      Date | { date: string; doctorId?: number }
+      | Date
+      | {
+          date: string
+          doctorId?: number
+          search?: string
+          time?: string
+          cpf?: string
+          status?: 'AGENDADO' | 'CANCELADO' | 'CONCLUIDO'
+        }
     >({
       query: (params) => {
         if (params instanceof Date) {
           return `/appointments?date=${params.toISOString().split('T')[0]}`
         }
-        const { date, doctorId } = params
+        const { date, doctorId, search, time, cpf, status } = params
         const queryParams = new URLSearchParams()
+
         queryParams.append('date', date)
         if (doctorId) {
           queryParams.append('doctorId', doctorId.toString())
         }
+        if (search) {
+          queryParams.append('personalData.fullName', search)
+        }
+        if (time) {
+          queryParams.append('time', time)
+        }
+        if (cpf) {
+          queryParams.append('personalData.cpf', cpf)
+        }
+        if (status) {
+          queryParams.append('status', status)
+        }
+
         return `/appointments?${queryParams.toString()}`
       },
       providesTags: ['Appointments'],

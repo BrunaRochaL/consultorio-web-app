@@ -17,6 +17,7 @@ interface AppointmentModalProps {
   onHide: () => void
   onSubmit: (data: AppointmentFormData) => void
   appointment?: AppointmentFormData
+  isEditMode?: boolean
 }
 
 export interface AppointmentFormData {
@@ -41,6 +42,7 @@ export interface AppointmentFormData {
     paymentMethod: 'PIX' | 'BOLETO' | 'DEBITO' | 'CREDITO' | 'DINHEIRO'
     value: number
   }
+  status: 'AGENDADO' | 'CANCELADO' | 'CONCLUIDO'
 }
 
 const AppointmentModal: React.FC<AppointmentModalProps> = ({
@@ -48,6 +50,7 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
   onHide,
   onSubmit,
   appointment,
+  isEditMode,
 }) => {
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState<AppointmentFormData>({
@@ -72,11 +75,15 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
       paymentMethod: 'PIX',
       value: 0,
     },
+    status: appointment?.status || 'AGENDADO',
   })
 
   useEffect(() => {
     if (show && appointment) {
-      setFormData(appointment)
+      setFormData({
+        ...appointment,
+        status: appointment.status || 'AGENDADO',
+      })
     } else if (!show) {
       setStep(1)
       setFormData({
@@ -101,6 +108,7 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
           paymentMethod: 'PIX',
           value: 0,
         },
+        status: 'AGENDADO',
       })
     }
   }, [show, appointment])
@@ -180,6 +188,35 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
       case 1:
         return (
           <>
+            {isEditMode && (
+              <Form.Group className="mb-3">
+                {renderRequiredLabel('Status')}
+                <Form.Select
+                  value={formData.status}
+                  onChange={(e) => {
+                    const newStatus = e.target.value as
+                      | 'AGENDADO'
+                      | 'CANCELADO'
+                      | 'CONCLUIDO'
+                    console.log('Status selecionado no modal:', newStatus)
+                    setFormData((prev) => {
+                      const newFormData = {
+                        ...prev,
+                        status: newStatus,
+                      }
+                      console.log('Novo estado do formData:', newFormData)
+                      return newFormData
+                    })
+                  }}
+                  required
+                >
+                  <option value="AGENDADO">Agendado</option>
+                  <option value="CANCELADO">Cancelado</option>
+                  <option value="CONCLUIDO">Concluído</option>
+                </Form.Select>
+              </Form.Group>
+            )}
+
             <Form.Group className="mb-3">
               {renderRequiredLabel('Nome Completo')}
               <Form.Control
@@ -463,6 +500,7 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
     if (step < 3) {
       setStep(step + 1)
     } else {
+      console.log('Dados sendo enviados do modal:', formData)
       onSubmit(formData)
       setStep(1)
       onHide()

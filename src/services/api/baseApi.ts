@@ -6,7 +6,11 @@ import {
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react'
 
-export type TagTypes = 'Auth' | 'Dashboard' | 'Appointments' | 'TimeSlots'
+export const TagTypes = {
+  Appointments: 'Appointments',
+  TimeSlots: 'TimeSlots',
+  Doctors: 'Doctors',
+} as const
 
 const baseQueryWithDelay: BaseQueryFn<
   string | FetchArgs,
@@ -31,7 +35,7 @@ const baseQueryWithDelay: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: 'api',
   baseQuery: baseQueryWithDelay,
-  tagTypes: ['Auth', 'Dashboard', 'Appointments', 'TimeSlots'],
+  tagTypes: Object.values(TagTypes),
   endpoints: () => ({}),
 })
 

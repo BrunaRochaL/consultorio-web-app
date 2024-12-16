@@ -6,6 +6,8 @@ import { StatsSection } from '@/components/Dashboard/StatsSection/StatsSection'
 
 import { useAppointmentsStats } from '@/hooks/useAppointmentsStats'
 
+import { formatDayOfWeek } from '@/utils/helpers'
+
 import { useGetRemindersQuery } from '@/services/api'
 import { useGetAppointmentsQuery } from '@/services/api/appointments'
 import { Appointment } from '@/services/api/appointments'
@@ -41,6 +43,34 @@ const Dashboard: React.FC = () => {
 
   const stats = useAppointmentsStats(appointments, previousAppointments)
 
+  const [weeklyAppointments, setWeeklyAppointments] = useState<
+    Array<{
+      date: string
+      appointments: number
+    }>
+  >([])
+
+  useEffect(() => {
+    if (!appointments) return
+
+    const last7Days = Array.from({ length: 7 }, (_, i) => {
+      const date = new Date(selectedDate)
+      date.setDate(date.getDate() - i)
+      const formattedDate = date.toISOString().split('T')[0]
+
+      const appointmentsForDay = appointments.filter(
+        (apt) => apt.date === formattedDate
+      ).length
+
+      return {
+        date: formatDayOfWeek(formattedDate),
+        appointments: appointmentsForDay,
+      }
+    }).reverse()
+
+    setWeeklyAppointments(last7Days)
+  }, [appointments, selectedDate])
+
   const formatPatientsList = () => {
     if (!appointments) return []
 
@@ -49,7 +79,7 @@ const Dashboard: React.FC = () => {
       name: apt.personalData.fullName,
       avatar: '/images/default-avatar.png',
       appointmentTime: apt.time,
-      isCompleted: apt.status === 'CONCLUIDO',
+      isCompleted: apt.status,
     }))
   }
 
@@ -71,7 +101,6 @@ const Dashboard: React.FC = () => {
 
   const handleSearch = (value: string) => {
     setSearchTerm(value)
-    // TODO: Implementar busca
   }
 
   const handleStatsClick = {
@@ -97,6 +126,7 @@ const Dashboard: React.FC = () => {
           dailyPatients={stats.patients}
           dailyAppointments={stats.appointments}
           dailyRevenue={stats.revenue}
+          weeklyAppointments={weeklyAppointments}
           onCardClick={handleStatsClick}
           compareToPrevious={stats.compareToPrevious}
           loading={isLoading || isChangingDate}
