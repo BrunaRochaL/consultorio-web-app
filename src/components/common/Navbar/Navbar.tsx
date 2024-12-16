@@ -33,6 +33,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
   const handleLogout = () => {
     dispatch(logout())
+    window.location.href = 'https://www.linkedin.com/in/brunarochal/'
   }
   return (
     <BootstrapNavbar
@@ -92,7 +93,7 @@ const Navbar: React.FC<NavbarProps> = ({
                   {item.label}
                 </Nav.Link>
               ))}
-              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+              <Nav.Link onClick={handleLogout}>Sair</Nav.Link>
             </Nav>
           </div>
         </BootstrapNavbar.Collapse>
