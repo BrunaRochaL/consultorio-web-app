@@ -10,9 +10,12 @@ export const formatDate = (date: Date | string): string => {
   return dateObj.toLocaleDateString('pt-BR')
 }
 
-export const formatTime = (date: Date | string): string => {
+export const formatTime = (
+  date: Date | string,
+  locale: string = 'pt-BR'
+): string => {
   const dateObj = typeof date === 'string' ? new Date(date) : date
-  return dateObj.toLocaleTimeString('pt-BR', {
+  return dateObj.toLocaleTimeString(locale, {
     hour: '2-digit',
     minute: '2-digit',
   })
@@ -107,4 +110,12 @@ export const formatDayOfWeek = (dateString: string): string => {
   const date = new Date(dateString)
   const days = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
   return days[date.getDay()]
+}
+
+export const isRouteActive = (currentPath: string, path: string): boolean => {
+  return currentPath === path
+}
+
+export const buildRoute = (base: string, path: string): string => {
+  return `${base}${path}`
 }

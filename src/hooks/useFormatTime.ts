@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { formatTime } from '@/utils/common/helpers'
+import { formatTime } from '@/utils/helpers'
 
 const useFormatTime = (locale: string = 'pt-BR'): string => {
   const [time, setTime] = useState<string>(formatTime(new Date(), locale))
