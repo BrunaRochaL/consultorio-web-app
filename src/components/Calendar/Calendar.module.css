@@ -1,5 +1,6 @@
 .calendarContainer {
   width: 100%;
+  min-width: 312px;
   margin: 0 auto;
 }
 
