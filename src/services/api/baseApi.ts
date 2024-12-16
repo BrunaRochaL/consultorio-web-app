@@ -12,13 +12,15 @@ export const TagTypes = {
   Doctors: 'Doctors',
 } as const
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+
 const baseQueryWithDelay: BaseQueryFn<
   string | FetchArgs,
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
   const baseQuery = fetchBaseQuery({
-    baseUrl: 'http://localhost:3001',
+    baseUrl: API_URL,
     prepareHeaders: (headers) => {
       return headers
     },
