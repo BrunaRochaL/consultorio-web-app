@@ -37,6 +37,14 @@ interface AuthData {
   isAuthenticated: boolean
 }
 
+interface Doctor {
+  id: number
+  name: string
+  avatar: string
+  specialty: string
+  available: boolean
+}
+
 export const baseApi = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001' }),
@@ -67,6 +75,15 @@ export const remindersApi = baseApi.injectEndpoints({
   }),
 })
 
+export const doctorsApi = baseApi.injectEndpoints({
+  endpoints: (builder) => ({
+    getDoctors: builder.query<Doctor[], void>({
+      query: () => '/doctors',
+    }),
+  }),
+})
+
 export const { useGetAuthQuery } = authApi
 export const { useGetDashboardDataQuery } = dashboardApi
 export const { useGetRemindersQuery } = remindersApi
+export const { useGetDoctorsQuery } = doctorsApi

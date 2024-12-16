@@ -248,6 +248,148 @@
       "description": "Participação em curso online de atualização."
     }
   ],
+  "doctors": [
+    {
+      "id": 1,
+      "name": "Dr. João Silva",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Cardiologista",
+      "available": true
+    },
+    {
+      "id": 2,
+      "name": "Dra. Maria Santos",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Pediatra",
+      "available": true
+    },
+    {
+      "id": 3,
+      "name": "Dr. Carlos Oliveira",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Ortopedista",
+      "available": false
+    },
+    {
+      "id": 4,
+      "name": "Dra. Ana Paula Costa",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Dermatologista",
+      "available": true
+    },
+    {
+      "id": 5,
+      "name": "Dr. Ricardo Mendes",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Neurologista",
+      "available": true
+    },
+    {
+      "id": 6,
+      "name": "Dra. Beatriz Lima",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Ginecologista",
+      "available": true
+    },
+    {
+      "id": 7,
+      "name": "Dr. Fernando Santos",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Oftalmologista",
+      "available": false
+    },
+    {
+      "id": 8,
+      "name": "Dra. Carolina Ferreira",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Endocrinologista",
+      "available": true
+    },
+    {
+      "id": 9,
+      "name": "Dr. Marcelo Alves",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Urologista",
+      "available": true
+    },
+    {
+      "id": 10,
+      "name": "Dra. Patricia Rocha",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Psiquiatra",
+      "available": false
+    },
+    {
+      "id": 11,
+      "name": "Dr. Gabriel Costa",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Otorrinolaringologista",
+      "available": true
+    },
+    {
+      "id": 12,
+      "name": "Dra. Luciana Martins",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Pediatra",
+      "available": true
+    },
+    {
+      "id": 13,
+      "name": "Dr. Rafael Souza",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Cardiologista",
+      "available": true
+    },
+    {
+      "id": 14,
+      "name": "Dra. Juliana Pereira",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Dermatologista",
+      "available": false
+    },
+    {
+      "id": 15,
+      "name": "Dr. Lucas Barbosa",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Ortopedista",
+      "available": true
+    },
+    {
+      "id": 16,
+      "name": "Dra. Mariana Costa",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Ginecologista",
+      "available": true
+    },
+    {
+      "id": 17,
+      "name": "Dr. Thiago Nunes",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Neurologista",
+      "available": false
+    },
+    {
+      "id": 18,
+      "name": "Dra. Amanda Silva",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Endocrinologista",
+      "available": true
+    },
+    {
+      "id": 19,
+      "name": "Dr. Bruno Santos",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Oftalmologista",
+      "available": true
+    },
+    {
+      "id": 20,
+      "name": "Dra. Camila Oliveira",
+      "avatar": "/images/default-avatar.png",
+      "specialty": "Psiquiatra",
+      "available": true
+    }
+  ],
   "dashboard": {
     "stats": {
       "patients": 8,
