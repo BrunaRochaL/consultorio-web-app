@@ -1,34 +1,45 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 
-interface User {
-  name: string;
-  avatarUrl?: string;
+import { baseApi } from '@/services/api'
+
+export interface User {
+  name: string
+  avatarUrl: string
 }
 
-interface AuthState {
-  isAuthenticated: boolean;
-  user: User | null;
+export interface AuthState {
+  user: User | null
+  isAuthenticated: boolean
 }
 
 const initialState: AuthState = {
-  isAuthenticated: false,
   user: null,
-};
+  isAuthenticated: false,
+}
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    login(state, action: PayloadAction<User>) {
-      state.isAuthenticated = true;
-      state.user = action.payload;
+    setUser: (state, action) => {
+      state.user = action.payload
+      state.isAuthenticated = !!action.payload
     },
-    logout(state) {
-      state.isAuthenticated = false;
-      state.user = null;
+    logout: (state) => {
+      state.user = null
+      state.isAuthenticated = false
     },
   },
-});
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      baseApi.endpoints.getAuth.matchFulfilled,
+      (state, { payload }) => {
+        state.user = payload.user
+        state.isAuthenticated = payload.isAuthenticated
+      }
+    )
+  },
+})
 
-export const { login, logout } = authSlice.actions;
-export default authSlice.reducer;
+export const { setUser, logout } = authSlice.actions
+export default authSlice.reducer
