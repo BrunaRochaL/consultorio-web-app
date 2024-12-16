@@ -1,9 +1,6 @@
 export const ROUTES = {
-  HOME: '/home',
   DASHBOARD: '/dashboard',
-  PACIENTES: '/pacientes',
-  CONSULTAS: '/consultas',
-  RELATORIOS: '/relatorios',
-  CONFIGURACOES: '/configuracoes',
+  SCHEDULING: '/scheduling',
+  APPOINTMENTS: '/appointments',
   NOT_FOUND: '*',
-};
+} as const
