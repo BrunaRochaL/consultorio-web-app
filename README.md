@@ -1,50 +1,101 @@
-# React + TypeScript + Vite
+# Advice Health App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Pré-requisitos
 
-Currently, two official plugins are available:
+Antes de começar, certifique-se de ter instalado em sua máquina:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js (versão 18 ou superior)
+- npm (geralmente vem com Node.js)
 
-## Expanding the ESLint configuration
+## Instalação
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Clone o repositório:
+git clone
+cd advice-health-app
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+2. Instale as dependências:
+npm install
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Executando o Projeto
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+O projeto possui dois componentes principais que precisam ser executados:
+
+### Frontend (Aplicação React)
+
+Para iniciar o servidor de desenvolvimento:
+npm run dev
+
+A aplicação estará disponível em `http://localhost:5173`
+
+### Backend (JSON Server)
+
+Para iniciar o servidor de dados:
+npm run server
+
+O servidor estará disponível em `http://localhost:3001`
+
+## Scripts Disponíveis
+
+- `npm run dev` - Inicia o servidor de desenvolvimento
+- `npm run build` - Gera a versão de produção
+- `npm run lint` - Executa a verificação de código
+- `npm run preview` - Visualiza a build de produção
+- `npm run server` - Inicia o JSON Server
+
+## Principais Tecnologias
+
+- React 18
+- TypeScript
+- Redux Toolkit
+- React Router DOM
+- Bootstrap 5
+- Chart.js
+- React Bootstrap
+- JSON Server
+
+## Estrutura do Projeto
+
+advice-health-app/
+├── src/
+│ ├── components/
+│ │ ├── common/
+│ │ └── Dashboard/
+│ ├── features/
+│ │ ├── appointments/
+│ │ └── auth/
+│ ├── services/
+│ │ └── api/
+│ └── assets/
+├── public/
+└── db.json
+
+## Desenvolvimento
+
+O projeto utiliza:
+- TypeScript para tipagem estática
+- ESLint para linting
+- Prettier para formatação de código
+- Redux Toolkit para gerenciamento de estado
+- React Router para navegação
+- Bootstrap para estilização
+- Chart.js para visualização de dados
+
+## Ambiente de Produção
+
+Para gerar uma build de produção:
+npm run build
+
+Para visualizar a build localmente:
+npm run preview
+
+## Notas Importantes
+
+- Certifique-se de que o JSON Server (backend) esteja rodando antes de iniciar o frontend
+- O arquivo `db.json` contém os dados iniciais do projeto
+- As variáveis de ambiente podem ser configuradas através do arquivo `.env`
+
+## Suporte
+
+Em caso de dúvidas ou problemas, abra uma issue no repositório do projeto.
