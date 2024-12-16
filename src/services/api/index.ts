@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { baseApi } from './baseApi'
 
 interface DashboardData {
   stats: {
@@ -45,11 +45,13 @@ interface Doctor {
   available: boolean
 }
 
-export const baseApi = createApi({
-  reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001' }),
-  endpoints: () => ({}),
-})
+interface TimeSlot {
+  id: number
+  time: string
+  available: boolean
+}
+
+export { baseApi }
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -83,7 +85,19 @@ export const doctorsApi = baseApi.injectEndpoints({
   }),
 })
 
+export const timeSlotsApi = baseApi.injectEndpoints({
+  endpoints: (builder) => ({
+    getTimeSlots: builder.query<TimeSlot[], { doctorId: number; date: string }>(
+      {
+        query: ({ doctorId, date }) =>
+          `/timeSlots?doctorId=${doctorId}&date=${date}`,
+      }
+    ),
+  }),
+})
+
 export const { useGetAuthQuery } = authApi
 export const { useGetDashboardDataQuery } = dashboardApi
 export const { useGetRemindersQuery } = remindersApi
 export const { useGetDoctorsQuery } = doctorsApi
+export const { useGetTimeSlotsQuery } = timeSlotsApi

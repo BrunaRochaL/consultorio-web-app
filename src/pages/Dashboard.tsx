@@ -4,21 +4,17 @@ import { useSearchParams } from 'react-router-dom'
 
 import { StatsSection } from '@/components/Dashboard/StatsSection/StatsSection'
 
-import { useGetDashboardDataQuery, useGetRemindersQuery } from '@/services/api'
+import { useAppointmentsStats } from '@/hooks/useAppointmentsStats'
+
+import { useGetRemindersQuery } from '@/services/api'
+import { useGetAppointmentsQuery } from '@/services/api/appointments'
+import { Appointment } from '@/services/api/appointments'
 
 import { AppointmentsTable } from '../components/Dashboard/AppointmentsTable/AppointmentsTable'
 import CalendarSection from '../components/Dashboard/CalendarSection/CalendarSection'
 import PatientsList from '../components/Dashboard/PatientsList/PatientsList'
 import SearchSection from '../components/Dashboard/SearchSection/SearchSection'
 import styles from '../styles/Typography.module.css'
-
-type DashboardPatient = {
-  id: number
-  name: string
-  avatar: string
-  appointmentTime: string
-  isCompleted: boolean
-}
 
 const Dashboard: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -29,14 +25,33 @@ const Dashboard: React.FC = () => {
     return dateParam ? new Date(dateParam) : new Date()
   })
 
+  const previousDate = new Date(selectedDate)
+  previousDate.setDate(previousDate.getDate() - 1)
+
   const {
-    data: dayData,
+    data: appointments,
     isLoading,
     error,
-  } = useGetDashboardDataQuery(selectedDate)
+  } = useGetAppointmentsQuery(selectedDate)
+
+  const { data: previousAppointments } = useGetAppointmentsQuery(previousDate)
 
   const { data: reminders, isLoading: isLoadingReminders } =
     useGetRemindersQuery()
+
+  const stats = useAppointmentsStats(appointments, previousAppointments)
+
+  const formatPatientsList = () => {
+    if (!appointments) return []
+
+    return appointments.map((apt: Appointment) => ({
+      id: Number(apt.id),
+      name: apt.personalData.fullName,
+      avatar: '/images/default-avatar.png',
+      appointmentTime: apt.time,
+      isCompleted: apt.status === 'CONCLUIDO',
+    }))
+  }
 
   const handleDateSelect = (date: Date) => {
     setIsChangingDate(true)
@@ -52,11 +67,11 @@ const Dashboard: React.FC = () => {
 
       return () => clearTimeout(timer)
     }
-  }, [dayData, isLoading])
+  }, [appointments, isLoading])
 
   const handleSearch = (value: string) => {
     setSearchTerm(value)
-    console.log('Buscando por:', value)
+    // TODO: Implementar busca
   }
 
   const handleStatsClick = {
@@ -67,17 +82,6 @@ const Dashboard: React.FC = () => {
 
   if (error) {
     return <div>Erro ao carregar dados</div>
-  }
-
-  const stats = dayData?.stats || {
-    patients: 0,
-    appointments: 0,
-    revenue: 0,
-    compareToPrevious: {
-      patients: 0,
-      appointments: 0,
-      revenue: 0,
-    },
   }
 
   return (
@@ -111,7 +115,7 @@ const Dashboard: React.FC = () => {
         />
 
         <PatientsList
-          patients={dayData?.patients as DashboardPatient[]}
+          patients={formatPatientsList()}
           isLoading={isLoading || isChangingDate}
         />
       </Col>
