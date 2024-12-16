@@ -35,6 +35,14 @@
       "type": "paciente",
       "date": "2024-12-16T08:00:00",
       "description": "Consulta de rotina"
+    },
+    {
+      "id": "2",
+      "title": "Retorno",
+      "name": "Carlos Santos",
+      "type": "paciente",
+      "date": "2024-12-16T10:30:00",
+      "description": "Avaliação pós-cirúrgica"
     }
   ],
   "doctors": [
@@ -511,6 +519,11 @@
   ],
   "appointments": [
     {
+      "status": "AGENDADO",
+      "date": "2024-12-16",
+      "time": "09:00",
+      "doctorId": "1",
+      "timeSlotId": "2",
       "personalData": {
         "fullName": "bruna guex",
         "cpf": "040.970.260-97",
@@ -530,15 +543,38 @@
       },
       "payment": {
         "paymentMethod": "PIX",
-        "value": "2.13"
+        "value": "2133.33"
       },
-      "timeSlotId": "2",
-      "doctorId": "1",
-      "date": "2024-12-16",
-      "time": "09:00",
-      "createdAt": "2024-12-16T05:22:27.809Z",
-      "status": "AGENDADO",
       "id": "59ad"
+    },
+    {
+      "status": "CANCELADO",
+      "date": "2024-12-16",
+      "time": "11:00",
+      "doctorId": "8",
+      "timeSlotId": "39",
+      "personalData": {
+        "fullName": "bruna guexxxxx",
+        "cpf": "040.970.260-97",
+        "gender": "OTHER",
+        "birthDate": "11/11/2000",
+        "phone": "(31) 23131-2312",
+        "email": "dawd@da.com"
+      },
+      "address": {
+        "street": "Rua do Marisco",
+        "number": "44",
+        "complement": "",
+        "neighborhood": "Ingleses do Rio Vermelho",
+        "city": "Florianópolis",
+        "state": "SC",
+        "zipCode": "88058090"
+      },
+      "payment": {
+        "paymentMethod": "PIX",
+        "value": "23.33"
+      },
+      "id": "4918"
     }
   ]
 }
