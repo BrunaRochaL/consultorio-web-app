@@ -13,6 +13,7 @@ interface StatsSectionProps {
   dailyPatients: number
   dailyAppointments: number
   dailyRevenue: number
+  weeklyAppointments: Array<{ date: string; appointments: number }>
   onCardClick?: {
     patients?: () => void
     appointments?: () => void
@@ -30,6 +31,7 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
   dailyPatients,
   dailyAppointments,
   dailyRevenue,
+  weeklyAppointments,
   onCardClick,
   loading,
   compareToPrevious,
@@ -46,15 +48,20 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
           value={dailyPatients}
           subtitle="pacientes"
           onClick={onCardClick?.patients}
-          trend={
-            compareToPrevious?.patients
-              ? {
-                  value: compareToPrevious.patients,
-                  isPositive: compareToPrevious.patients > 0,
-                }
-              : undefined
-          }
+          trend={undefined}
           icon={<i className="fas fa-users" />}
+          chartData={{
+            labels: weeklyAppointments.map((item) => item.date),
+            datasets: [
+              {
+                label: 'Agendamentos',
+                data: [15, 22, 18, 25, 20, 12, 16],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+              },
+            ],
+          }}
         />
       </Col>
       <Col xs={12} md={6}>
