@@ -1,0 +1,35 @@
+.timeSlot {
+  height: 100px;
+  position: relative;
+  padding: 1rem 1.5rem;
+}
+
+.actionIcons {
+  display: flex;
+  gap: 8px;
+  transform: translate(16px, 21px);
+}
+
+.actionIcons i {
+  cursor: pointer;
+  padding: 5px;
+  color: #646464;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-size: 16px;
+  border-radius: 50%;
+}
+
+.actionIcons i:hover {
+  color: #4a4a4a;
+  background-color: #f0f0f0;
+}
+
+.actionIcons i:active {
+  background-color: #4a4a4a;
+  color: #f0f0f0;
+}

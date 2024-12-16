@@ -18,12 +18,18 @@ interface DoctorListProps {
   doctors: Doctor[]
   isLoading: boolean
   maxHeight?: number | string
+  onDoctorSelect?: (doctor: {
+    id: number
+    name: string
+    specialty: string
+  }) => void
 }
 
 const DoctorList: React.FC<DoctorListProps> = ({
   doctors,
   isLoading,
   maxHeight = 300,
+  onDoctorSelect,
 }) => {
   return (
     <ItemList
@@ -39,6 +45,14 @@ const DoctorList: React.FC<DoctorListProps> = ({
           title={capitalizeWords(doctor.name)}
           subtitle={doctor.specialty}
           status={doctor.available ? 'Disponível' : 'Indisponível'}
+          onClick={() =>
+            onDoctorSelect?.({
+              id: doctor.id,
+              name: doctor.name,
+              specialty: doctor.specialty,
+            })
+          }
+          clickable
         />
       ))}
     </ItemList>

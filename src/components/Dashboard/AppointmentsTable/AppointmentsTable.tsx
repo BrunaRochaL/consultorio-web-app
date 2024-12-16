@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
+import { toast } from 'react-toastify'
 
 import styles from '../../../styles/Typography.module.css'
 import Table from '../../common/Table/Table'
@@ -45,13 +46,19 @@ export const AppointmentsTable: React.FC<AppointmentsTableProps> = ({
   }
 
   const handleConfirmDelete = () => {
-    if (reminderToDelete) {
-      setReminders((prevReminders) =>
-        prevReminders.filter((reminder) => reminder.id !== reminderToDelete)
-      )
+    try {
+      if (reminderToDelete) {
+        setReminders((prevReminders) =>
+          prevReminders.filter((reminder) => reminder.id !== reminderToDelete)
+        )
+        toast.success('Aviso excluído com sucesso!')
+      }
+      setShowDeleteModal(false)
+      setReminderToDelete(null)
+    } catch (error) {
+      console.error('Erro ao excluir aviso:', error)
+      toast.error('Erro ao excluir aviso. Tente novamente.')
     }
-    setShowDeleteModal(false)
-    setReminderToDelete(null)
   }
 
   const columns = [

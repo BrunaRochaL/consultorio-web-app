@@ -85,3 +85,45 @@
   align-items: center;
   gap: 0.5rem;
 }
+
+.endIcon {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  color: #646464;
+  margin-right: 8px;
+  transition: all 0.2s;
+  transform: translate(24px, 19px);
+}
+
+.endIcon:hover {
+  background-color: #f0f0f0;
+}
+
+.endIcon:active {
+  background-color: #4a4a4a;
+  color: #f0f0f0;
+}
+
+.item.timeSlot {
+  height: 80px;
+  position: relative;
+  padding: 1rem 1.5rem;
+}
+
+.timeSlot .endIcon {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+}
+
+.timeSlot .endIcon i {
+  font-size: 12px;
+}

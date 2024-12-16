@@ -12,6 +12,8 @@ interface ItemListRowProps {
   className?: string
   leftContent?: ReactNode
   rightContent?: ReactNode
+  clickable?: boolean
+  endIcon?: ReactNode
 }
 
 const ItemListRow: React.FC<ItemListRowProps> = ({
@@ -24,10 +26,12 @@ const ItemListRow: React.FC<ItemListRowProps> = ({
   className = '',
   leftContent,
   rightContent,
+  clickable,
+  endIcon,
 }) => {
   return (
     <div
-      className={`${styles.item} ${onClick ? styles.clickable : ''} ${className}`}
+      className={`${styles.item} ${clickable ? styles.clickable : ''} ${className}`}
       onClick={onClick}
     >
       {leftContent ||
@@ -46,7 +50,8 @@ const ItemListRow: React.FC<ItemListRowProps> = ({
       </div>
 
       {rightContent ||
-        (actions && <div className={styles.actions}>{actions}</div>)}
+        (actions && <div className={styles.actions}>{actions}</div>) ||
+        (endIcon && <div className={styles.endIcon}>{endIcon}</div>)}
     </div>
   )
 }
