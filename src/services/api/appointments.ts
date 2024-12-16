@@ -1,6 +1,6 @@
 import { AppointmentFormData } from '@/components/Scheduling/AppointmentModal/AppointmentModal'
 
-import { TagTypes, baseApi } from './baseApi'
+import { baseApi } from './baseApi'
 
 export interface TimeSlot {
   id: number
