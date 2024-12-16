@@ -1,5 +1,4 @@
-import debounce from 'lodash/debounce'
-import React, { useCallback, useState } from 'react'
+import React from 'react'
 import { Button } from 'react-bootstrap'
 
 import { FilterValues } from '@/components/common/AdvancedFilters/AdvancedFilters'
@@ -7,22 +6,17 @@ import AdvancedFilters from '@/components/common/AdvancedFilters/AdvancedFilters
 import SearchInput from '@/components/common/SearchInput/SearchInput'
 import Table from '@/components/common/Table/Table'
 
-import styles from './AppointmentsTable.module.css'
-import { Doctor } from '@/types/doctor'
+import { useAppointmentsTable } from '@/hooks/useAppointmentsTable'
 
-interface AppointmentTableData {
-  id: string
-  patientName: string
-  date: string
-  time: string
-  status: string
-  doctor: string
+import styles from './AppointmentsTable.module.css'
+
+export interface Doctor {
+  id: number
+  name: string
   specialty: string
-  phone: string
-  originalData: AppointmentData
 }
 
-interface AppointmentData {
+export interface AppointmentData {
   id: string
   date: string
   time: string
@@ -32,6 +26,18 @@ interface AppointmentData {
     fullName: string
     phone: string
   }
+}
+
+export interface AppointmentTableData {
+  id: string
+  patientName: string
+  date: string
+  time: string
+  status: string
+  doctor: string
+  specialty: string
+  phone: string
+  originalData: AppointmentData
 }
 
 interface AppointmentsTableProps {
@@ -49,74 +55,22 @@ const AppointmentsTable: React.FC<AppointmentsTableProps> = ({
   onEdit,
   onFiltersChange,
 }) => {
-  const [currentPage, setCurrentPage] = useState(1)
-  const [itemsPerPage, setItemsPerPage] = useState(10)
-  const [showFiltersModal, setShowFiltersModal] = useState(false)
-  const [searchTerm, setSearchTerm] = useState('')
-  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('')
-
-  const handleSearch = (value: string) => {
-    setSearchTerm(value)
-    setCurrentPage(1)
-    debouncedSearch(value)
-  }
-
-  const handleClearFilters = () => {
-    setSearchTerm('')
-    setDebouncedSearchTerm('')
-    onFiltersChange({
-      date: new Date().toISOString().split('T')[0],
-    })
-    setCurrentPage(1)
-    setShowFiltersModal(false)
-  }
-
-  const handleApplyFilters = (filters: FilterValues) => {
-    const updatedFilters = {
-      ...filters,
-      date: filters.date || new Date().toISOString().split('T')[0],
-    }
-
-    if (!filters.patientName) {
-      setSearchTerm('')
-      setDebouncedSearchTerm('')
-    }
-
-    onFiltersChange(updatedFilters)
-    setCurrentPage(1)
-    setShowFiltersModal(false)
-  }
-
-  const debouncedSearch = useCallback(
-    debounce((term: string) => {
-      setDebouncedSearchTerm(term)
-      onFiltersChange((prevFilters) => ({
-        ...prevFilters,
-        patientName: term,
-      }))
-    }, 500),
-    [onFiltersChange]
-  )
-
-  const formattedAppointments: AppointmentTableData[] = appointments.map(
-    (appointment) => {
-      const doctor = doctors.find((d) => d.id === appointment.doctorId)
-      const [year, month, day] = appointment.date.split('-')
-      const formattedDate = `${day}/${month}/${year}`
-
-      return {
-        id: appointment.id,
-        patientName: appointment.personalData.fullName,
-        date: formattedDate,
-        time: appointment.time,
-        status: appointment.status,
-        doctor: doctor ? `${doctor.name}` : `Dr. ${appointment.doctorId}`,
-        specialty: doctor?.specialty || 'Especialidade',
-        phone: appointment.personalData.phone,
-        originalData: appointment,
-      }
-    }
-  )
+  const {
+    currentPage,
+    setCurrentPage,
+    itemsPerPage,
+    setItemsPerPage,
+    showFiltersModal,
+    setShowFiltersModal,
+    searchTerm,
+    handleSearch,
+    handleApplyFilters,
+    paginatedData,
+  } = useAppointmentsTable({
+    onFiltersChange,
+    doctors,
+    appointments,
+  })
 
   const columns = [
     { key: 'patientName', label: 'Paciente', width: '20%' },
@@ -158,13 +112,6 @@ const AppointmentsTable: React.FC<AppointmentsTableProps> = ({
     },
   ]
 
-  const indexOfLastItem = currentPage * itemsPerPage
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage
-  const currentItems = formattedAppointments.slice(
-    indexOfFirstItem,
-    indexOfLastItem
-  )
-
   return (
     <>
       <div className={`d-flex gap-3 mb-4 ${styles.searchContainer}`}>
@@ -187,9 +134,9 @@ const AppointmentsTable: React.FC<AppointmentsTableProps> = ({
 
       <Table
         columns={columns}
-        data={currentItems}
+        data={paginatedData.currentItems}
         isLoading={isLoading}
-        totalItems={formattedAppointments.length}
+        totalItems={paginatedData.totalItems}
         itemsPerPage={itemsPerPage}
         currentPage={currentPage}
         onPageChange={setCurrentPage}
