@@ -40,12 +40,11 @@ export const StatsSection: React.FC<StatsSectionProps> = ({
 
   return (
     <Row>
-      <Col xs={12} md={6}>
+      <Col xs={12} md={6} className={styles.statsCol}>
         <StatsCard
           title="Pacientes Atendidos Hoje"
           value={dailyPatients}
           subtitle="pacientes"
-          className={styles.dashboardCard}
           onClick={onCardClick?.patients}
           trend={
             compareToPrevious?.patients

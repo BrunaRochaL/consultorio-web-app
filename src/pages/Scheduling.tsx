@@ -90,40 +90,38 @@ const Scheduling: React.FC = () => {
   }, [timeSlots, appointments, selectedDoctor?.id])
 
   return (
-    <Container fluid>
-      <Row>
-        <Col md={4}>
-          <h2>Médicos Disponíveis</h2>
-          <DoctorList
-            doctors={doctors || []}
-            isLoading={isLoadingDoctors}
-            onDoctorSelect={handleDoctorSelect}
-          />
-          <div className="mt-4">
-            <CalendarSection
-              selectedDate={selectedDate}
-              onDateSelect={handleDateSelect}
-            />
-          </div>
-        </Col>
-        <Col md={8}>
-          <h2>Horários Disponíveis</h2>
-          {selectedDoctor && (
-            <div className="mb-3">
-              <h5>{selectedDoctor.name}</h5>
-              <p className="text-muted">{selectedDoctor.specialty}</p>
-            </div>
-          )}
-          <TimeSlotList
-            slots={updatedTimeSlots || []}
-            isLoading={isLoadingTimeSlots || isLoadingAppointments}
-            selectedDoctor={selectedDoctor}
+    <Row>
+      <Col xs={12} md={6} sm={12} xl={4}>
+        <h4>Médicos</h4>
+        <DoctorList
+          doctors={doctors || []}
+          isLoading={isLoadingDoctors}
+          onDoctorSelect={handleDoctorSelect}
+        />
+        <div className="mt-4">
+          <CalendarSection
             selectedDate={selectedDate}
-            maxHeight={700}
+            onDateSelect={handleDateSelect}
           />
-        </Col>
-      </Row>
-    </Container>
+        </div>
+      </Col>
+      <Col xs={12} md={6} sm={12} xl={8}>
+        <h4>Horários Disponíveis</h4>
+        {selectedDoctor && (
+          <div className="mb-3">
+            <h5>{selectedDoctor.name}</h5>
+            <p className="text-muted">{selectedDoctor.specialty}</p>
+          </div>
+        )}
+        <TimeSlotList
+          slots={updatedTimeSlots || []}
+          isLoading={isLoadingTimeSlots || isLoadingAppointments}
+          selectedDoctor={selectedDoctor}
+          selectedDate={selectedDate}
+          maxHeight={900}
+        />
+      </Col>
+    </Row>
   )
 }
 

@@ -14,3 +14,13 @@
   padding: 2rem;
   color: #666;
 }
+
+.statsCol {
+  height: 100%;
+}
+
+@media (max-width: 767px) {
+  .statsCol {
+    margin-bottom: 1.5rem;
+  }
+}

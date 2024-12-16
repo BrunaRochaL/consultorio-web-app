@@ -86,7 +86,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <Row>
-      <Col xs={12} lg={8}>
+      <Col xs={12} md={6} sm={12} xl={8}>
         <SearchSection
           value={searchTerm}
           onChange={handleSearch}
@@ -108,7 +108,7 @@ const Dashboard: React.FC = () => {
         />
       </Col>
 
-      <Col xs={12} lg={4}>
+      <Col xs={12} md={6} sm={12} xl={4}>
         <CalendarSection
           selectedDate={selectedDate}
           onDateSelect={handleDateSelect}

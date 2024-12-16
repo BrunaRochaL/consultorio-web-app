@@ -245,7 +245,11 @@ const TimeSlotList: React.FC<TimeSlotListProps> = ({
       <ItemList
         isLoading={isLoading}
         loadingComponent={<PatientListSkeleton count={8} />}
-        emptyMessage="Nenhum horário disponível para esta data"
+        emptyMessage={
+          !selectedDoctor
+            ? 'Selecione um médico para ver os horários disponíveis'
+            : 'Nenhum horário disponível para esta data'
+        }
         maxHeight={700}
       >
         {slots.map((slot) => (
@@ -315,7 +319,11 @@ const TimeSlotList: React.FC<TimeSlotListProps> = ({
         <Modal.Body>
           <p>Selecione o novo horário para a consulta:</p>
           <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
-            {availableSlots.length > 0 ? (
+            {!selectedDoctor ? (
+              <p className="text-center text-muted">
+                Selecione um médico para ver os horários disponíveis
+              </p>
+            ) : availableSlots.length > 0 ? (
               availableSlots.map((slot) => (
                 <Button
                   key={slot.id}

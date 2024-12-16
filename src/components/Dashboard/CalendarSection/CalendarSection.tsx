@@ -1,6 +1,8 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
 
+import styles from './CalendarSection.module.css'
+
 import Calendar from '../../Calendar/Calendar'
 
 interface CalendarSectionProps {
@@ -13,7 +15,7 @@ const CalendarSection: React.FC<CalendarSectionProps> = ({
   onDateSelect,
 }) => {
   return (
-    <Card className="mb-4">
+    <Card className={styles.calendarCard}>
       <Card.Body>
         <Calendar onDateSelect={onDateSelect} selectedDate={selectedDate} />
       </Card.Body>
