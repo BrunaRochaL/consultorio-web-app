@@ -4,6 +4,14 @@ import InputMask from 'react-input-mask'
 
 import styles from './AppointmentModal.module.css'
 
+import {
+  formatCurrency,
+  validateBirthDate,
+  validateCPF,
+  validateEmail,
+  validatePhone,
+} from '../../../utils/helpers'
+
 interface AppointmentModalProps {
   show: boolean
   onHide: () => void
@@ -33,67 +41,6 @@ export interface AppointmentFormData {
     paymentMethod: 'PIX' | 'BOLETO' | 'DEBITO' | 'CREDITO' | 'DINHEIRO'
     value: number
   }
-}
-
-const validateCPF = (cpf: string) => {
-  const cleanCPF = cpf.replace(/\D/g, '')
-
-  if (cleanCPF.length !== 11) return false
-
-  if (/^(\d)\1{10}$/.test(cleanCPF)) return false
-
-  let sum = 0
-  for (let i = 0; i < 9; i++) {
-    sum += parseInt(cleanCPF.charAt(i)) * (10 - i)
-  }
-  let digit = 11 - (sum % 11)
-  if (digit >= 10) digit = 0
-  if (digit !== parseInt(cleanCPF.charAt(9))) return false
-
-  sum = 0
-  for (let i = 0; i < 10; i++) {
-    sum += parseInt(cleanCPF.charAt(i)) * (11 - i)
-  }
-  digit = 11 - (sum % 11)
-  if (digit >= 10) digit = 0
-  if (digit !== parseInt(cleanCPF.charAt(10))) return false
-
-  return true
-}
-
-const validatePhone = (phone: string) => {
-  const cleanPhone = phone.replace(/\D/g, '')
-  return cleanPhone.length >= 10 && cleanPhone.length <= 12
-}
-
-const validateBirthDate = (date: string) => {
-  if (!date) return false
-
-  const parts = date.split('/')
-  if (parts.length !== 3) return false
-
-  const day = parseInt(parts[0])
-  const month = parseInt(parts[1]) - 1
-  const year = parseInt(parts[2])
-
-  const birthDate = new Date(year, month, day)
-  const today = new Date()
-
-  return (
-    birthDate instanceof Date &&
-    !isNaN(birthDate.getTime()) &&
-    birthDate < today &&
-    day === birthDate.getDate() &&
-    month === birthDate.getMonth() &&
-    year === birthDate.getFullYear()
-  )
-}
-
-const formatCurrency = (value: number) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  }).format(value)
 }
 
 const AppointmentModal: React.FC<AppointmentModalProps> = ({
@@ -199,10 +146,6 @@ const AppointmentModal: React.FC<AppointmentModalProps> = ({
     if (value.length === 8) {
       fetchAddressData(value)
     }
-  }
-
-  const validateEmail = (email: string) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   }
 
   const validateStep = () => {
