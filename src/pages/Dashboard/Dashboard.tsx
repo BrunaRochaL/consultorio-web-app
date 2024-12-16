@@ -12,11 +12,11 @@ import { useGetRemindersQuery } from '@/services/api'
 import { useGetAppointmentsQuery } from '@/services/api/appointments'
 import { Appointment } from '@/services/api/appointments'
 
-import { AppointmentsTable } from '../components/Dashboard/AppointmentsTable/AppointmentsTable'
-import CalendarSection from '../components/Dashboard/CalendarSection/CalendarSection'
-import PatientsList from '../components/Dashboard/PatientsList/PatientsList'
-import SearchSection from '../components/Dashboard/SearchSection/SearchSection'
-import styles from '../styles/Typography.module.css'
+import { AppointmentsTable } from '../../components/Dashboard/AppointmentsTable/AppointmentsTable'
+import CalendarSection from '../../components/Dashboard/CalendarSection/CalendarSection'
+import PatientsList from '../../components/Dashboard/PatientsList/PatientsList'
+import SearchSection from '../../components/Dashboard/SearchSection/SearchSection'
+import styles from '../../styles/Typography.module.css'
 
 const Dashboard: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams()

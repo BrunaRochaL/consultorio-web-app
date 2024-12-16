@@ -5,10 +5,9 @@ import { ROUTES } from '@/utils/constants/routes'
 
 import NotFound from '@/pages/NotFound'
 
-import Appointments from '../pages/Appointments'
-
-const Dashboard = lazy(() => import('@/pages/Dashboard'))
-const Scheduling = lazy(() => import('@/pages/Scheduling'))
+const Dashboard = lazy(() => import('@/pages/Dashboard/Dashboard'))
+const Scheduling = lazy(() => import('@/pages/Scheduling/Scheduling'))
+const Appointments = lazy(() => import('@/pages/Appointments/Appointments'))
 
 const AppRoutes: React.FC = () => {
   return (

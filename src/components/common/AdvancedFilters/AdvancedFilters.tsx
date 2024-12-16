@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import InputMask from 'react-input-mask'
 
+import { Doctor } from '@/components/Appointments/AppointmentsTable'
+
 interface AdvancedFiltersProps {
   show: boolean
   onHide: () => void

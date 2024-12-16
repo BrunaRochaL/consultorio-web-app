@@ -7,7 +7,7 @@ import { formatCurrency } from '@/utils/helpers'
 
 import StatsSectionSkeleton from './StatsSectionSkeleton'
 
-import styles from '../../../pages/Dashboard.module.css'
+import styles from '../../../pages/Dashboard/Dashboard.module.css'
 
 interface StatsSectionProps {
   dailyPatients: number

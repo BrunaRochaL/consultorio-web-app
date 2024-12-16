@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table as BTable, Col, Form, Pagination, Row } from 'react-bootstrap'
+import { Table as BTable, Form, Pagination } from 'react-bootstrap'
 
 import styles from './Table.module.css'
 import TableSkeleton from './TableSkeleton'

@@ -7,9 +7,9 @@ import {
   useGetTimeSlotsQuery,
 } from '@/services/api/appointments'
 
-import CalendarSection from '../components/Dashboard/CalendarSection/CalendarSection'
-import DoctorList from '../components/Scheduling/DoctorList/DoctorList'
-import TimeSlotList from '../components/Scheduling/TimeSlotList/TimeSlotList'
+import CalendarSection from '../../components/Dashboard/CalendarSection/CalendarSection'
+import DoctorList from '../../components/Scheduling/DoctorList/DoctorList'
+import TimeSlotList from '../../components/Scheduling/TimeSlotList/TimeSlotList'
 
 interface SelectedDoctor {
   id: number
